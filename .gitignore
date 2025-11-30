@@ -206,3 +206,18 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+artifacts/
+catboost_info/
+*.pkl
+*.json
+*.tsv
+*.tfevents
+
+artifacts/model.pkl
+catboost_info/*
+EDA notebook
+tfevents
+tsv
+json logs

@@ -52,9 +52,74 @@ class ModelTrainer:
                 "AdaBoostRegressor": AdaBoostRegressor(),
                 "GradientBoosting": GradientBoostingRegressor()
             }
+            params = {
+            "LinearRegression": {
+                "fit_intercept": [True, False],
+                "copy_X": [True, False]
+            },
+
+            "Lasso": {
+                "alpha": [0.001, 0.01, 0.1, 1, 5],
+                "max_iter": [5000, 10000, 20000]
+            },
+
+
+            "Ridge": {
+                "alpha": [0.1, 1, 5, 10, 20],
+                "solver": ["auto", "sag", "svd"]   # remove lbfgs
+            },
+
+            "KNeighborsRegressor": {
+                "n_neighbors": [3, 5, 7, 9, 11],
+                "weights": ["uniform", "distance"],
+                "metric": ["euclidean", "manhattan"]
+            },
+
+            "DecisionTree": {
+                "criterion": ["squared_error", "friedman_mse"],
+                "max_depth": [None, 5, 10, 20, 30],
+                "min_samples_split": [2, 5, 10],
+                "min_samples_leaf": [1, 2, 4]
+            },
+
+            "RandomForest": {
+                "n_estimators": [100, 200, 300],
+                "max_depth": [None, 10, 20, 30],
+                "min_samples_split": [2, 5, 10],
+                "min_samples_leaf": [1, 2, 4]
+            },
+
+            "XGBRegressor": {
+                "n_estimators": [100, 200, 300],
+                "learning_rate": [0.01, 0.05, 0.1],
+                "max_depth": [3, 5, 7],
+                "subsample": [0.6, 0.8, 1.0],
+                "colsample_bytree": [0.6, 0.8, 1.0]
+            },
+
+            "CatBoostRegressor": {
+                "depth": [4, 6, 8, 10],
+                "learning_rate": [0.01, 0.05, 0.1],
+                "iterations": [200, 400, 600]
+            },
+
+            "AdaBoostRegressor": {
+                "n_estimators": [50, 100, 200],
+                "learning_rate": [0.01, 0.05, 0.1, 1.0],
+                "loss": ["linear", "square", "exponential"]
+            },
+
+            "GradientBoosting": {
+                "n_estimators": [100, 200, 300],
+                "learning_rate": [0.01, 0.05, 0.1],
+                "max_depth": [3, 5, 7],
+                "subsample": [0.6, 0.8, 1.0]
+        }
+    }
+
 
             model_report: dict = evaluate_model(
-                x_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test, models=models
+                x_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test, models=models ,param=params
             )
 
             # Find best model based on performance score (R²)
